@@ -1,0 +1,15 @@
+{
+  "name": "月下独酌 · yzdz666",
+  "short_name": "月下独酌",
+  "description": "月下独酌（yzdz666）的个人主页与开源项目入口",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f4f2",
+  "theme_color": "#0b0b0c",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "/assets/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/assets/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

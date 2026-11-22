@@ -33,3 +33,28 @@ python3 -m http.server 8080
 
 仓库名必须是 `yzdz666.github.io`，推送到 `main` 分支即自动发布（Pages 源：`main` / `/`）。
 `CNAME` 不存在时使用默认域名。
+
+## 图标与头像
+
+站点图标取自 QQ 头像（`q1.qlogo.cn`，540×540 动图），用第一帧做了去雪花处理，只保留人物剪影，缩到小尺寸仍可辨认。
+
+| 文件 | 用途 |
+|---|---|
+| `favicon.ico` | 根目录默认图标，含 16/32/48 |
+| `assets/favicon-16x16.png` / `favicon-32x32.png` | 浏览器标签页 |
+| `assets/apple-touch-icon.png` | iOS 添加到主屏幕（180） |
+| `assets/android-chrome-192x192.png` / `-512x512.png` | Android / PWA |
+| `site.webmanifest` | PWA 清单，名称、主题色、图标 |
+| `assets/avatar.png` | 导航栏与关于区静态头像 |
+| `assets/avatar.gif` | 关于区动图（进入视口后才加载，`prefers-reduced-motion` 下不加载） |
+| `assets/og-image.png` | 社交分享图 1200×630 |
+
+更换头像时，只需按同一命名覆盖 `assets/` 下的文件，并重新生成 `favicon.ico`。
+
+## 页面交互
+
+- 主题三态切换（跟随系统 / 浅色 / 深色），存 `localStorage`
+- 项目按类型筛选（全部 / 机器人 / 音乐 / AI / 工具），带计数
+- 导航随滚动高亮当前区块，顶部进度条同步滚动
+- 回到顶部按钮、数字滚动、卡片逐条入场
+- 关于区头像进入视口后由静态图切换为动图
