@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://yzdz666.github.io/sitemap.xml

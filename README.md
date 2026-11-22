@@ -5,6 +5,8 @@
 - 线上地址：https://yzdz666.github.io/
 - 首页：`index.html`
 - 404：`404.html`
+- 站点地图：`sitemap.xml`
+- 抓取规则：`robots.txt`（已指向 sitemap）
 
 ## 本地预览
 
@@ -58,3 +60,15 @@ python3 -m http.server 8080
 - 导航随滚动高亮当前区块，顶部进度条同步滚动
 - 回到顶部按钮、数字滚动、卡片逐条入场
 - 关于区头像进入视口后由静态图切换为动图
+- 已关闭移动端点击高亮与鼠标点击后的焦点框；键盘 Tab 仍有可见焦点
+
+## SEO
+
+- 标题、描述按「人名 + 代表项目」组织，描述控制在 75 字内
+- `canonical`、`og:*`、`twitter:*` 全部指向正式域名，分享图为 1200×630
+- `JSON-LD` 使用 `ProfilePage` / `Person` / `WebSite` / `ItemList` 四个节点，`sameAs` 关联 GitHub
+- 语义结构：唯一 `h1`（含隐藏的品牌名）、三个带 `aria-labelledby` 的区块、时间线用 `<time datetime>`
+- `h1` 的视觉文案保持不变，品牌名通过 `.sr-only` 提供给搜索引擎与读屏
+- 站点地图与 `robots.txt` 已在根目录，`404.html` 标记 `noindex`
+
+改完内容后，记得同步 `sitemap.xml` 里的 `lastmod`。
