@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>月下独酌 · yzdz666</title>
+<meta name="description" content="月下独酌（yzdz666）的个人主页：QQ 机器人框架、洛雪音乐二改、AI 命令行工具等开源项目。">
+<meta name="author" content="月下独酌">
+<meta property="og:title" content="月下独酌 · yzdz666">
+<meta property="og:description" content="写点自己会用的东西。PHP 机器人框架、洛雪音乐二改、AI 命令行工具。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yzdz666.github.io/">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23fff' text-anchor='middle'%3EYZ%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#0b0b0c;
+  --ink-2:#3a3a41;
+  --ink-3:#6b6b73;
+  --ink-4:#9a9aa1;
+  --paper:#f4f4f2;
+  --surface:#ffffff;
+  --line:#e6e6e2;
+  --line-2:#d2d2cc;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --ease:cubic-bezier(.2,.7,.25,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#f3f3f0;
+    --ink-2:#c8c8c2;
+    --ink-3:#98989f;
+    --ink-4:#6a6a72;
+    --paper:#0a0a0b;
+    --surface:#121214;
+    --line:#232327;
+    --line-2:#33333a;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3,p{margin:0}
+
+/* 顶部滚动进度 */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:0;
+  background:var(--ink);z-index:100;transition:width .08s linear,opacity .3s ease;
+}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+
+/* ============ 导航 ============ */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease,background-color .3s ease;
+}
+.nav.is-scrolled{border-bottom-color:var(--line);background:color-mix(in srgb,var(--paper) 96%,transparent)}
+.nav-inner{height:66px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.02em}
+.brand-mark{
+  width:30px;height:30px;display:grid;place-items:center;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.02em;
+}
+.brand-text{font-size:14px}
+.nav-links{display:flex;gap:26px;margin-left:auto;font-size:13.5px;color:var(--ink-3)}
+.nav-links a{position:relative;padding:4px 0;transition:color .2s ease}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--ink);transition:width .3s var(--ease);
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-github{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;padding:7px 13px;
+  border:1px solid var(--line-2);transition:all .22s var(--ease);
+}
+.nav-github:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.nav-github svg{width:14px;height:14px;fill:currentColor}
+
+/* ============ Hero ============ */
+.hero{padding:78px 0 64px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:start}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:26px;
+}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--ink-3)}
+h1{
+  font-size:clamp(46px,7.4vw,96px);
+  line-height:.96;letter-spacing:-.045em;font-weight:700;
+}
+h1 .thin{font-weight:300;color:var(--ink-3)}
+.lede{
+  margin-top:26px;max-width:33em;font-size:16px;line-height:1.75;color:var(--ink-2);
+}
+.lede strong{font-weight:600;color:var(--ink)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;font-size:13.5px;font-weight:500;
+  border:1px solid var(--line-2);transition:all .22s var(--ease);
+}
+.btn:hover{border-color:var(--ink);transform:translateY(-1px)}
+.btn-solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-solid:hover{background:transparent;color:var(--ink)}
+.btn svg{width:13px;height:13px;fill:currentColor}
+
+/* 最近发布卡 */
+.release{
+  background:var(--ink);color:var(--paper);
+  padding:24px 24px 22px;position:relative;overflow:hidden;
+}
+.release::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 42%,rgba(255,255,255,.055) 50%,transparent 58%);
+  transform:translateX(-100%);animation:sheen 6s ease-in-out 1.5s infinite;
+}
+@keyframes sheen{0%,55%{transform:translateX(-100%)}85%,100%{transform:translateX(100%)}}
+.release-tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.55;margin-bottom:14px;
+}
+.release-ver{font-family:var(--mono);font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.release-name{margin-top:9px;font-size:13.5px;opacity:.82}
+.release-list{margin:18px 0 0;padding:0;list-style:none;font-size:12.5px;line-height:1.9;opacity:.68}
+.release-list li{display:flex;gap:8px}
+.release-list li::before{content:"—";opacity:.5;flex:0 0 auto}
+.release-btn{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:20px;padding:10px 14px;border:1px solid rgba(255,255,255,.26);
+  font-size:12.5px;transition:all .22s var(--ease);
+}
+.release-btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.release-btn span:last-child{transition:transform .22s var(--ease)}
+.release-btn:hover span:last-child{transform:translateX(3px)}
+@media (prefers-color-scheme:dark){
+  .release{background:#1a1a1e;color:#f3f3f0}
+}
+
+/* ============ 数据条 ============ */
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.stat{padding:26px 0 24px;position:relative}
+.stat+.stat{padding-left:28px}
+.stat+.stat::before{content:"";position:absolute;left:0;top:26px;bottom:24px;width:1px;background:var(--line)}
+.stat-num{font-family:var(--mono);font-size:29px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat-cap{margin-top:9px;font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
+
+/* ============ 区块通用 ============ */
+section.block{padding:78px 0}
+.sec-head{display:flex;align-items:flex-end;gap:18px;margin-bottom:38px;flex-wrap:wrap}
+.sec-idx{font-family:var(--mono);font-size:11px;color:var(--ink-4);letter-spacing:.1em;padding-bottom:6px}
+.sec-head h2{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1;position:relative;padding-bottom:12px}
+.sec-head h2::after{content:"";position:absolute;left:0;bottom:0;width:38px;height:2px;background:var(--ink)}
+.sec-note{margin-left:auto;font-size:12.5px;color:var(--ink-3);padding-bottom:6px}
+
+/* ============ 项目网格 ============ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--line)}
+.card{
+  background:var(--surface);padding:26px 26px 22px;display:flex;flex-direction:column;
+  min-height:216px;position:relative;transition:background-color .25s ease;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ink);
+  transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease);
+}
+.card:hover::before{transform:scaleY(1)}
+.card:hover{background:var(--paper)}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.card-no{font-family:var(--mono);font-size:10.5px;color:var(--ink-4);letter-spacing:.08em;transition:color .25s ease}
+.card:hover .card-no{color:var(--ink)}
+.card-lang{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--line);padding:2px 7px}
+.card h3{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.35;word-break:break-word}
+.card p{margin-top:9px;font-size:13px;line-height:1.75;color:var(--ink-3);flex:1}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3)}
+.card-star{font-family:var(--mono);display:inline-flex;align-items:center;gap:5px}
+.card-star svg{width:11px;height:11px;fill:currentColor;opacity:.6}
+.card-arrow{font-family:var(--mono);transition:transform .25s var(--ease),color .25s ease}
+.card:hover .card-arrow{transform:translateX(4px);color:var(--ink)}
+.card.badge-featured .card-no::after{content:" 精选";font-family:var(--sans);font-size:9px;letter-spacing:.04em;border:1px solid var(--line-2);padding:1px 4px;margin-left:7px;vertical-align:1px}
+
+/* ============ 关于 ============ */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;border-top:1px solid var(--line);padding-top:48px}
+.about p{font-size:14.5px;line-height:1.85;color:var(--ink-2);max-width:34em}
+.about p+p{margin-top:16px}
+.skill-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:26px}
+.skill{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--line-2);color:var(--ink-2);transition:all .2s ease}
+.skill:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.links-list{border-top:1px solid var(--line)}
+.links-list a{display:flex;align-items:center;gap:14px;padding:17px 2px;border-bottom:1px solid var(--line);font-size:13.5px;transition:padding .25s var(--ease)}
+.links-list a:hover{padding-left:10px}
+.links-list .k{font-family:var(--mono);font-size:10.5px;color:var(--ink-4);width:64px;flex:0 0 auto;letter-spacing:.05em;text-transform:uppercase}
+.links-list .v{font-weight:500}
+.links-list .go{margin-left:auto;color:var(--ink-4);transition:transform .25s var(--ease),color .25s ease}
+.links-list a:hover .go{transform:translateX(3px);color:var(--ink)}
+
+/* ============ 页脚 ============ */
+footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:80px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-left{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
+.foot-right{display:flex;gap:22px;font-size:12px;color:var(--ink-3)}
+.foot-right a:hover{color:var(--ink)}
+
+/* ============ 入场动画 ============ */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ 响应式 ============ */
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:56px 0 48px}
+  .release{max-width:340px}
+  .about{grid-template-columns:1fr;gap:40px}
+}
+@media (max-width:720px){
+  .wrap{padding:0 20px}
+  .nav-links{display:none}
+  .nav-github{margin-left:auto}
+  .nav-inner{height:60px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:20px 0 18px}
+  .stat+.stat{padding-left:0}
+  .stat:nth-child(odd){padding-right:16px}
+  .stat:nth-child(even){padding-left:16px}
+  .stat::before{display:none}
+  .stat:nth-child(even)::before{content:"";display:block;position:absolute;left:0;top:20px;bottom:18px;width:1px;background:var(--line)}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .grid{grid-template-columns:1fr}
+  section.block{padding:56px 0}
+  .sec-note{margin-left:0;flex-basis:100%;padding-bottom:0}
+  h1{font-size:44px}
+  .hero-actions .btn{flex:1;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">YZ</span>
+      <span class="brand-text">月下独酌</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#projects">项目</a>
+      <a href="#about">关于</a>
+    </nav>
+    <a class="nav-github" href="https://github.com/yzdz666" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Portfolio — 2026</div>
+        <h1>写点自己<br><span class="thin">会用的东西</span></h1>
+        <p class="lede">
+          我是<strong>月下独酌</strong>，独立开发者。主要写 <strong>PHP</strong> 和 <strong>TypeScript</strong>，
+          偶尔折腾 <strong>Rust</strong>。做的东西大多源于自己的需求：一个 QQ 官方机器人框架、
+          洛雪音乐的二改版本、还有几个不太正经的小工具。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="https://github.com/yzdz666/QQbot/releases/latest" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11.5 3.5 7l1.06-1.06L7.25 8.63V1.5h1.5v7.13l2.69-2.69L12.5 7 8 11.5ZM2 13.5v-4H1v4A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-4h-1v4H2Z"/></svg>
+            下载 QQbot
+          </a>
+          <a class="btn" href="#projects">浏览全部项目</a>
+        </div>
+      </div>
+
+      <aside class="release reveal">
+        <div class="release-tag">Latest Release</div>
+        <div class="release-ver">v1.7.7</div>
+        <div class="release-name">QQbot · 黑白主题 MONO</div>
+        <ul class="release-list">
+          <li>全新黑白界面与命令面板</li>
+          <li>群消息私聊回复</li>
+          <li>qlogo 头像三级兜底</li>
+        </ul>
+        <a class="release-btn" href="https://github.com/yzdz666/QQbot/releases/tag/v1.7.7" target="_blank" rel="noopener">
+          <span>查看更新说明</span><span>→</span>
+        </a>
+      </aside>
+    </section>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num" data-count="9">0</div><div class="stat-cap">公开项目</div></div>
+      <div class="stat"><div class="stat-num" data-count="28">0</div><div class="stat-cap">累计 Star</div></div>
+      <div class="stat"><div class="stat-num" data-count="5">0</div><div class="stat-cap">使用语言</div></div>
+      <div class="stat"><div class="stat-num">2026</div><div class="stat-cap">持续更新</div></div>
+    </div>
+
+    <section class="block" id="projects">
+      <div class="sec-head">
+        <span class="sec-idx">01</span>
+        <h2>项目</h2>
+        <span class="sec-note">9 个公开仓库，按最近更新排序</span>
+      </div>
+
+      <div class="grid">
+        <a class="card badge-featured" href="https://github.com/yzdz666/QQbot" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">01</span><span class="card-lang">PHP</span></div>
+          <h3>QQbot</h3>
+          <p>QQ 官方机器人 PHP 框架。WebSocket 与 Webhook 双通道、可视化管理后台、插件机制，覆盖群聊 / 单聊 / 频道全场景。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>7</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card badge-featured" href="https://github.com/yzdz666/lx-music-mobile-mod" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">02</span><span class="card-lang">TypeScript</span></div>
+          <h3>lx-music-mobile-mod</h3>
+          <p>LX Mod：基于洛雪音乐移动版的二改版。一起听网页版、WebDAV 云盘、8 档音质、主题系统。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>9</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/lx-music-desktop-mod" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">03</span><span class="card-lang">TypeScript</span></div>
+          <h3>lx-music-desktop-mod</h3>
+          <p>LX Mod 桌面版：基于洛雪音乐桌面版的二改版（Windows / Linux），11 档音质、三平台「我的音乐」、云盘、本地音乐、一起听。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>2</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/listen-together-server" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">04</span><span class="card-lang">HTML</span></div>
+          <h3>listen-together-server</h3>
+          <p>LX Music 二改「一起听」的房间服务器与网页版：WebSocket 同步歌曲、进度、歌词与音频，可自建。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>2</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/yunzhi-one-cli" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">05</span><span class="card-lang">Rust</span></div>
+          <h3>yunzhi-one-cli</h3>
+          <p>一个命令，连接所有智能能力。全能 AI 智能体命令行平台。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>4</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/yuexia-plugins" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">06</span><span class="card-lang">PHP</span></div>
+          <h3>yuexia-plugins</h3>
+          <p>月下 PHP 官方插件仓库 / Yuexia PHP Official Plugin Marketplace。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>1</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/web-chat" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">07</span><span class="card-lang">HTML</span></div>
+          <h3>web-chat</h3>
+          <p>云智在线对话平台。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>1</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/yy" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">08</span><span class="card-lang">Web</span></div>
+          <h3>yy</h3>
+          <p>一言。收集与随机展示短句的小站点。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>2</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/yzdz666/auto-sign" target="_blank" rel="noopener">
+          <div class="card-top"><span class="card-no">09</span><span class="card-lang">Python</span></div>
+          <h3>auto-sign</h3>
+          <p>自动化签到脚本。</p>
+          <div class="card-foot">
+            <span class="card-star"><svg viewBox="0 0 16 16"><path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.85 4.9L8 12.1l-4.45 2.3.85-4.9L.8 6l5-.7L8 .8Z"/></svg>0</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="block" id="about">
+      <div class="about">
+        <div>
+          <div class="sec-head">
+            <span class="sec-idx">02</span>
+            <h2>关于</h2>
+          </div>
+          <p>
+            非科班，靠拆别人的代码入门。习惯先把自己需要的东西写出来，能跑起来再谈优雅。
+            项目大多是自用为主，顺手整理成开源，如果刚好对你有用，那挺好。
+          </p>
+          <p>
+            目前主要在维护 QQbot 和 LX Mod 两条线，其余视心情更新。
+            用得上就在仓库点个 Star，遇到问题提 Issue，我会看。
+          </p>
+          <div class="skill-list">
+            <span class="skill">PHP</span>
+            <span class="skill">TypeScript</span>
+            <span class="skill">Rust</span>
+            <span class="skill">Python</span>
+            <span class="skill">Vue</span>
+            <span class="skill">SQLite</span>
+            <span class="skill">WebSocket</span>
+          </div>
+        </div>
+        <div class="links-list">
+          <a href="https://github.com/yzdz666" target="_blank" rel="noopener">
+            <span class="k">GitHub</span><span class="v">@yzdz666</span><span class="go">→</span>
+          </a>
+          <a href="https://github.com/yzdz666/QQbot" target="_blank" rel="noopener">
+            <span class="k">Project</span><span class="v">QQbot 机器人框架</span><span class="go">→</span>
+          </a>
+          <a href="https://github.com/yzdz666/QQbot/releases/latest" target="_blank" rel="noopener">
+            <span class="k">Release</span><span class="v">最新安装包</span><span class="go">→</span>
+          </a>
+          <a href="https://github.com/yzdz666/QQbot/issues" target="_blank" rel="noopener">
+            <span class="k">Issue</span><span class="v">问题反馈</span><span class="go">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-left">© 2026 月下独酌 · yzdz666.github.io</div>
+    <div class="foot-right">
+      <a href="https://github.com/yzdz666" target="_blank" rel="noopener">GitHub</a>
+      <a href="#top">回到顶部</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 滚动进度
+  var bar = document.getElementById('progress');
+  var nav = document.getElementById('nav');
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var y = window.scrollY || document.documentElement.scrollTop;
+    if (bar) {
+      bar.style.width = h > 4 ? Math.min(100, (y / h) * 100) + '%' : '0%';
+      bar.style.opacity = h > 4 ? '1' : '0';
+    }
+    if (nav) nav.classList.toggle('is-scrolled', y > 6);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // 入场
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    for (var j = 0; j < items.length; j++) io.observe(items[j]);
+  }
+
+  // 数字滚动
+  var nums = document.querySelectorAll('.stat-num[data-count]');
+  if (!reduce) {
+    nums.forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      var start = null, dur = 1100;
+      function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min(1, (ts - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    });
+  } else {
+    nums.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
+  }
+
+  // 卡片逐条入场
+  var cards = document.querySelectorAll('.card');
+  if (!reduce && 'IntersectionObserver' in window) {
+    cards.forEach(function (c) { c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; });
+    var co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, k) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var idx = Array.prototype.indexOf.call(cards, el) % 6;
+        el.style.transition = 'opacity .55s var(--ease) ' + (idx * 45) + 'ms, transform .55s var(--ease) ' + (idx * 45) + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        co.unobserve(el);
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(function (c) { co.observe(c); });
+  }
+})();
+</script>
+</body>
+</html>
